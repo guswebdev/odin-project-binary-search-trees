@@ -6,9 +6,9 @@ export class Tree {
   }
 
   buildTree(arr) {
-    //Recibe un array y lo transforme en un arbol binario balanceado
-    //con objetos Node ordenado y sin duplicaciones
     //Devuelve el Nodo Raiz
+    arr.sort((a, b) => a - b);
+    arr = [...new Set(arr)];
     return this.crearArbol(arr, 0, arr.length - 1);
   }
 
