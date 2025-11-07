@@ -2,13 +2,12 @@ import { Node } from "./Node.js";
 
 export class Tree {
   constructor(arr) {
-    this.root = this.buildTree(arr);
+    const sortedArray = [...new Set(arr)].sort((a, b) => a - b);
+    this.root = this.buildTree(sortedArray);
   }
 
   buildTree(arr) {
     //Devuelve el Nodo Raiz
-    arr.sort((a, b) => a - b);
-    arr = [...new Set(arr)];
     return this.crearArbol(arr, 0, arr.length - 1);
   }
 
@@ -26,7 +25,29 @@ export class Tree {
   }
 
   //Insertar un valor en el arbol
-  insert(value) {}
+  insert(value, node = this.root) {
+    //console.log(node)
+    if (this.root === null) {
+      this.root = new Node(value);
+      return;
+    }
+
+    if (node === null) {
+      return new Node(value);
+    }
+
+    if (value === node.data) {
+      return node;
+    }
+
+    if (value < node.data) {
+      node.left = this.insert(value, node.left);
+    } else {
+      node.right = this.insert(value, node.right);
+    }
+
+    return node;
+  }
 
   //Eliminar un valor en el arbol
   deleteItem(value) {
@@ -62,7 +83,7 @@ export class Tree {
   //Necesita el nodo raiz
   prettyPrint = (node = this.root, prefix = "", isLeft = true) => {
     if (node === null) {
-      return;
+      return null;
     }
     if (node.right !== null) {
       this.prettyPrint(

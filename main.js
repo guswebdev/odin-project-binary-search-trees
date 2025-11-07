@@ -1,5 +1,8 @@
 import { Tree } from "./Tree.js";
 
-const arbol = new Tree([1, 2, 2, 9, 4, 7, 7, 6, 5, 5, 8, 3]);
+//[1, 3, 5,2]
+const arbol = new Tree([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+arbol.insert(4);
 
 arbol.prettyPrint();
